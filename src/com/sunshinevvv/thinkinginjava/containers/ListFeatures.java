@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Created by 光 on 2016/10/5.
+ * 需要特别注意的是，对于subList所做的修改，都会同样作用于原List，可以参见Demo：SubList.java
  */
 public class ListFeatures {
     public static void main(String[] args) {
@@ -17,9 +18,9 @@ public class ListFeatures {
         pets.remove("Hamster"); // Remove by object
         String p = pets.get(2);
         System.out.println("4: " + p + " " + pets.indexOf(p));
-//        String cymric = new String("Cymric");
-//        System.out.println("5: " + pets.indexOf(cymric));
-//        System.out.println("6: " + pets.remove(cymric));
+        String cymric = new String("Cymric");
+        System.out.println("5: " + pets.indexOf(cymric));
+        System.out.println("6: " + pets.remove(cymric));
         // Must be the exact object:
         System.out.println("7: " + pets.remove(p));
         System.out.println("8: " + pets);
