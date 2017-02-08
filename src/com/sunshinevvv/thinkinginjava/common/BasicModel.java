@@ -1,0 +1,35 @@
+package com.sunshinevvv.thinkinginjava.common;
+
+/**
+ * Created by sunshine on 2017/2/8.
+ * 测试用基本Model
+ */
+public class BasicModel {
+    private String name;
+    private int no;
+
+    public BasicModel(String name, int no) {
+        this.name = name;
+        this.no = no;
+    }
+
+    public String toString() {
+        return name + "-" + no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+}
