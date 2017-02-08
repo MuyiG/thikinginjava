@@ -9,3 +9,5 @@
 * Inner Classes : innerclass
 * Holding Your Objects : containers
 * Concurrency : concurrency
+
+另外还有一个common包，放一些基础性的通用性代码。
