@@ -1,11 +1,11 @@
-package com.sunshinevvv.thinkinginjava.containers;
+package com.sunshinevvv.thinkinginjava.holding;
 
 import java.util.*;
 
 /**
  * Created by 光 on 2017/2/10.
  *
- * 优先队列的示例
+ * 优先队列的简单示例，Integer，Character已经有天然的排序逻辑了，如果要使用自定义的数据类型，则也需要制定排序逻辑。
  */
 public class PriorityQueueDemo {
 
