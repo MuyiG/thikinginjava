@@ -1,9 +1,11 @@
-package com.sunshinevvv.thinkinginjava.containers;
+package com.sunshinevvv.thinkinginjava.holding;
 
 import java.util.Collections;
 import java.util.LinkedList;
 
 /**
+ * LinkedList同时提供了Stack和Queue的接口。
+ *
  * Created by sunshine on 2017/1/29.
  */
 public class LinkedListFeatures {
@@ -16,7 +18,8 @@ public class LinkedListFeatures {
         System.out.println("getFirst() : " + pets.getFirst());
         System.out.println("element() : " + pets.element());
         System.out.println("peek() : " + pets.peek());
-        // 同上，也是poll特殊
+
+        // 同上，也是只有poll会返回null
         System.out.println("remove() : " + pets.remove());
         System.out.println("removeFirst() : " + pets.removeFirst());
         System.out.println("poll() : " + pets.poll());

@@ -7,7 +7,7 @@
 * Polymorphism : polymorphism
 * Interfaces : interfaces
 * Inner Classes : innerclass
-* Holding Your Objects : containers
+* Holding Your Objects : holding
 * Concurrency : concurrency
 
 另外还有一个common包，放一些基础性的通用性代码。
