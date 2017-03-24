@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
  */
 public class Regx {
     public static void main(String[] args) {
+        blockWords();
+    }
+
+    private static void blockWords() {
         List<String> words = Arrays.asList("毛泽东", "江泽民", "习近平");
         StringBuilder sb = new StringBuilder();
         sb.append('(');
@@ -18,9 +22,11 @@ public class Regx {
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.append(')');
+        String pattern = sb.toString();
+        System.out.println(pattern);
 
         String s = "毛泽东哈哈哈哈哈江泽民呵呵呵呵习近平一员8元9河南科技比较好社保局开发板上课";
-        Matcher matcher = Pattern.compile(sb.toString()).matcher(s);
+        Matcher matcher = Pattern.compile(pattern).matcher(s);
         if (matcher.find()) {
             s = matcher.replaceAll("***");
         }
