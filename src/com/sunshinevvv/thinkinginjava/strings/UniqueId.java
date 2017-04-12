@@ -7,17 +7,19 @@ public class UniqueId {
     public static void main(String[] args) {
         System.out.println("a=" + (int)'a' + ", z=" + (int)'z' + ", A=" + (int)'A' + ", Z=" + (int)'Z' + ", 0=" + (int)'0' + ", 9=" + (int)'9');
 
-        System.out.println(generateUniqueId("H000001"));
-        System.out.println(generateUniqueId("H000002"));
-
-        System.out.println(generateUniqueId("B000001"));
-        System.out.println(generateUniqueId("B000002"));
-
-        System.out.println(generateUniqueId("X000001"));
-        System.out.println(generateUniqueId("X000002"));
-
-        System.out.println(generateUniqueId("H000262"));
-        System.out.println(generateUniqueId("H000263"));
+        System.out.println("H033=" + generateUniqueId("H033"));
+        System.out.println("H323=" + generateUniqueId("H323"));
+        System.out.println("H0023=" + generateUniqueId("H0023"));
+        System.out.println("H0032=" + generateUniqueId("H0032"));
+        System.out.println("H0034=" + generateUniqueId("H0034"));
+        System.out.println("H00026=" + generateUniqueId("H00026"));
+        System.out.println("H000186=" + generateUniqueId("H000186"));
+        System.out.println("H00189=" + generateUniqueId("H00189"));
+        System.out.println("H00190=" + generateUniqueId("H00190"));
+        System.out.println("H00001=" + generateUniqueId("H00001"));
+        System.out.println("H00289=" + generateUniqueId("H00289"));
+        System.out.println("H00323=" + generateUniqueId("H00323"));
+        System.out.println("H000289=" + generateUniqueId("H000289"));
     }
 
     /**

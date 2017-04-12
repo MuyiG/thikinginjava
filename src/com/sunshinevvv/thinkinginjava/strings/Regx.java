@@ -10,7 +10,14 @@ import java.util.regex.Pattern;
  */
 public class Regx {
     public static void main(String[] args) {
-        blockWords();
+//        blockWords();
+        match("Haha");
+        match("Y0002");
+        match("H00378");
+        match("B890809");
+        match("X87981739dhkj2");
+        match("H");
+        match("YH9930304");
     }
 
     private static void blockWords() {
@@ -31,5 +38,15 @@ public class Regx {
             s = matcher.replaceAll("***");
         }
         System.out.println(s);
+    }
+
+    public static void match(String s) {
+        Pattern pattern = Pattern.compile("^(H|B|X)\\d+$");
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.find()) {
+            System.out.println("find " + s);
+        } else {
+            System.out.println("can't find " + s);
+        }
     }
 }
