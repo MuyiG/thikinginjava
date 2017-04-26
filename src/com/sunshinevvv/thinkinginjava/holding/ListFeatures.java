@@ -8,6 +8,11 @@ import java.util.*;
  */
 public class ListFeatures {
     public static void main(String[] args) {
+        features();
+        foreach();
+    }
+
+    private static void features() {
         Random rand = new Random(47);
         List<String> pets = new ArrayList<>();
         Collections.addAll(pets, "Rat", "Manx", "Cymric", "Mutt", "Pug", "Cymric", "Pug");
@@ -60,5 +65,19 @@ public class ListFeatures {
         System.out.println("22: " + o[3]);
         String[] pa = pets.toArray(new String[0]);
         System.out.println("23: " + pa[3]);
+    }
+
+    private static void foreach() {
+        List<String> testList = new ArrayList<>();
+        // 无输出
+        for (String s : testList) {
+            System.out.printf(s);
+        }
+
+        testList = null;
+        // NPE
+        for (String s : testList) {
+            System.out.printf(s);
+        }
     }
 }
