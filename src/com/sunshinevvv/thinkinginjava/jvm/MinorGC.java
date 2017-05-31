@@ -16,5 +16,11 @@ public class MinorGC {
         byte[] bytes2 = new byte[2 * _1MB];
         byte[] bytes3 = new byte[2 * _1MB];
         byte[] bytes4 = new byte[4 * _1MB];
+//        byte[] bytes5 = new byte[4 * _1MB];
+//        byte[] bytes6 = new byte[4 * _1MB];
+//        byte[] bytes7 = new byte[4 * _1MB];
+//        byte[] bytes8 = new byte[4 * _1MB];
+//        byte[] bytes9 = new byte[4 * _1MB];
+//        byte[] bytes10 = new byte[4 * _1MB];
     }
 }
