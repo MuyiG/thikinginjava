@@ -1,7 +1,7 @@
 package com.sunshinevvv.thinkinginjava.jvm;
 
 /**
- * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
+ * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -XX:SurvivorRatio=8
  *
  * Created by 光 on 2017/3/30.
  */
@@ -23,4 +23,5 @@ public class MinorGC {
 //        byte[] bytes9 = new byte[4 * _1MB];
 //        byte[] bytes10 = new byte[4 * _1MB];
     }
+
 }
