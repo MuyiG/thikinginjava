@@ -6,8 +6,6 @@ package com.sunshinevvv.thinkinginjava.jvm;
  * Created by sunshine on 2017/5/31.
  */
 public class StackOverflow {
-    private static final int _1MB = 1024 * 1024;
-
     private int stackLength = 0;
 
     public static void main(String[] args) {
@@ -22,7 +20,6 @@ public class StackOverflow {
 
     private void test() {
         stackLength++;
-//        byte[] bytes = new byte[_1MB];
         test();
     }
 
