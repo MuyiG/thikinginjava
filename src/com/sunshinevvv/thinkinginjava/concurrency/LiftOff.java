@@ -5,7 +5,7 @@ package com.sunshinevvv.thinkinginjava.concurrency;
  */
 public class LiftOff implements Runnable {
     private static int num = 0;
-    private int countDown = 10;
+    protected int countDown = 10;
 
     private final int id = num++;
 
