@@ -56,7 +56,7 @@ class InnerThread2 {
     private Thread t;
 
     public InnerThread2(String name) {
-        // An anonymous inner subclass of Thread is created and is upcast to a Thread reference t
+        // An anonymous inner subclass of Thread is created and is upcast to a Thread reference t，详见Inner Classes章节的Anonymous inner classes
         t = new Thread(name) {
             public void run() {
                 try {
