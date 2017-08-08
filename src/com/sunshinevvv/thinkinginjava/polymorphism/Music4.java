@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.interfaces.music4;
+package com.sunshinevvv.thinkinginjava.polymorphism;
 
 import com.sunshinevvv.thinkinginjava.polymorphism.music.Note;
 

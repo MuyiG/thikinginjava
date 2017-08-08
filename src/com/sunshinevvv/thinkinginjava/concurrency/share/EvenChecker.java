@@ -21,6 +21,7 @@ public class EvenChecker implements Runnable {
                 generator.cancel(); // Cancels all EvenCheckers
             }
         }
+        System.out.println("EvenChecker " + id + " canceled.");
     }
 
     // Test any type of IntGenerator:
