@@ -45,7 +45,7 @@ public class AttemptLocking {
             }
 
             public void run() {
-                al.lock.lock();
+                al.lock.lock(); // 这行很有意思：内部类线程的run方法里，可以访问得到外部变量的私有成员属性。。
                 System.out.println("acquired");
             }
         }.start();
