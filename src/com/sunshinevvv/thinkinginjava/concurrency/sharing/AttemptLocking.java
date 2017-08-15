@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.concurrency.share;
+package com.sunshinevvv.thinkinginjava.concurrency.sharing;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;

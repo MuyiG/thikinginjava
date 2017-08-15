@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.concurrency.share;
+package com.sunshinevvv.thinkinginjava.concurrency.sharing;
 
 public class EvenGenerator extends IntGenerator {
     private int currentEvenValue = 0;

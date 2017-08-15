@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.concurrency.share;
+package com.sunshinevvv.thinkinginjava.concurrency.sharing;
 
 public class SerialNumberGenerator {
     private static volatile int serialNumber = 0;

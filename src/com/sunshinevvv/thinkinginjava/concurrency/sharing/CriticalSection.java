@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.concurrency.share;
+package com.sunshinevvv.thinkinginjava.concurrency.sharing;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,17 +40,10 @@ class Pair { // Not thread-safe
         return "x: " + x + ", y: " + y;
     }
 
-    public class PairValuesNotEqualException
-            extends RuntimeException {
-        public PairValuesNotEqualException() {
-            super("Pair values not equal: " + Pair.this);
-        }
-    }
-
     // Arbitrary invariant -- both variables must be equal:
     public void checkState() {
         if (x != y) {
-            throw new PairValuesNotEqualException();
+            throw new RuntimeException("Pair values not equal: " + Pair.this);
         }
     }
 }
@@ -59,11 +52,10 @@ class Pair { // Not thread-safe
 abstract class PairManager {
     AtomicInteger checkCounter = new AtomicInteger(0);
     protected Pair p = new Pair();
-    private List<Pair> storage =
-            Collections.synchronizedList(new ArrayList<Pair>());
+    private List<Pair> storage = Collections.synchronizedList(new ArrayList<Pair>());
 
     public synchronized Pair getPair() {
-// Make a copy to keep the original safe:
+        // Make a copy to keep the original safe:
         return new Pair(p.getX(), p.getY());
     }
 
@@ -91,13 +83,14 @@ class PairManager1 extends PairManager {
 // Use a critical section:
 class PairManager2 extends PairManager {
     public void increment() {
-        Pair temp;
+//        Pair temp;
         synchronized (this) {
             p.incrementX();
             p.incrementY();
-            temp = getPair();
+//            temp = getPair(); // 为什么要把这行也同步了？
         }
-        store(temp);
+//        store(temp);
+        store(getPair());
     }
 }
 
@@ -115,8 +108,7 @@ class PairManipulator implements Runnable {
     }
 
     public String toString() {
-        return "Pair: " + pm.getPair() +
-                " checkCounter = " + pm.checkCounter.get();
+        return "Pair: " + pm.getPair() + " checkCounter = " + pm.checkCounter.get();
     }
 }
 
@@ -137,8 +129,7 @@ class PairChecker implements Runnable {
 
 public class CriticalSection {
     // Test the two different approaches:
-    static void
-    testApproaches(PairManager pman1, PairManager pman2) {
+    static void testApproaches(PairManager pman1, PairManager pman2) {
         ExecutorService exec = Executors.newCachedThreadPool();
         PairManipulator
                 pm1 = new PairManipulator(pman1),
