@@ -18,5 +18,7 @@ public class SubList {
         System.out.println("List:" + list + ", subList:" + subList);
         subList.add("f");
         System.out.println("List:" + list + ", subList:" + subList);
+        list = list.subList(0, 3);
+        System.out.println("List:" + list);
     }
 }
