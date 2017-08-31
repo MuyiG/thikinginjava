@@ -21,7 +21,6 @@ class Count {
         return (count = ++temp);
     }
 
-    // 这个synchronized去掉似乎没影响，实测
     public synchronized int value() {
         return count;
     }
