@@ -5,8 +5,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 class Car {
+    // 两个任务都关心的一个状态条件
     private boolean waxOn = false;
 
+    // 修改waxOn状态，并通知wait的线程
     public synchronized void waxed() {
         waxOn = true; // Ready to buff
         notifyAll();
@@ -17,15 +19,14 @@ class Car {
         notifyAll();
     }
 
-    public synchronized void waitForWaxing()
-            throws InterruptedException {
+    // 这两个wait的作用就是空等，直到自己关心的条件成立
+    public synchronized void waitForWaxing() throws InterruptedException {
         while (waxOn == false) {
             wait();
         }
     }
 
-    public synchronized void waitForBuffing()
-            throws InterruptedException {
+    public synchronized void waitForBuffing() throws InterruptedException {
         while (waxOn == true) {
             wait();
         }
