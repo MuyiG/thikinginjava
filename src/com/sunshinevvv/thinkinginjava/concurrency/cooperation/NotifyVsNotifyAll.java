@@ -11,10 +11,10 @@ class Blocker {
         try {
             while (!Thread.interrupted()) {
                 wait();
-                System.out.print(Thread.currentThread() + " ");
+                System.out.println(Thread.currentThread() + " awaken");
             }
         } catch (InterruptedException e) {
-// OK to exit this way
+            // OK to exit this way
         }
     }
 
@@ -51,30 +51,34 @@ public class NotifyVsNotifyAll {
             exec.execute(new Task());
         }
         exec.execute(new Task2());
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             boolean prod = true;
 
             public void run() {
                 if (prod) {
-                    System.out.print("\nnotify() ");
+                    System.out.println("notify() ");
                     Task.blocker.prod();
                     prod = false;
                 } else {
-                    System.out.print("\nnotifyAll() ");
+                    System.out.println("notifyAll() ");
                     Task.blocker.prodAll();
                     prod = true;
                 }
             }
-        }, 400, 400); // Run every .4 second
+        }, 0, 1000); // Run every 1 second
+
         TimeUnit.SECONDS.sleep(5); // Run for a while...
         timer.cancel();
-        System.out.println("\nTimer canceled");
-        TimeUnit.MILLISECONDS.sleep(500);
-        System.out.print("Task2.blocker.prodAll() ");
+        System.out.println("Timer canceled");
+
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Task2.blocker.prodAll() ");
         Task2.blocker.prodAll();
-        TimeUnit.MILLISECONDS.sleep(500);
-        System.out.println("\nShutting down");
+
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Shutting down");
         exec.shutdownNow(); // Interrupt all tasks
     }
 }

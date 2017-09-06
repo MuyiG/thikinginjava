@@ -17,6 +17,7 @@ class Blocked3 implements Runnable {
     private volatile double d = 0.0;
     public void run() {
         try {
+            // 手动检验interrupt status
             while(!Thread.interrupted()) {
                 // point1
                 NeedsCleanup n1 = new NeedsCleanup(1);
