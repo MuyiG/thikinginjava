@@ -7,6 +7,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 展示了Lock和Condition的用法，在这个例子里，其实没必要这么写，只是徒增复杂度。Lock和Condition应该被用在更加复杂的场景下。
+ */
 class Car2 {
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
