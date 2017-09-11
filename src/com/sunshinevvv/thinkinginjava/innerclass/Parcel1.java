@@ -1,9 +1,9 @@
 package com.sunshinevvv.thinkinginjava.innerclass;
 
 /**
- * Created by 光 on 2016/10/2.
+ * 内部类的最基本用法
  */
-public class Parcel2 {
+public class Parcel1 {
     class Contents {
         private int i = 11;
 
@@ -24,26 +24,16 @@ public class Parcel2 {
         }
     }
 
-    public Destination to(String s) {
-        return new Destination(s);
-    }
-
-    public Contents contents() {
-        return new Contents();
-    }
-
+    // Using inner classes looks just like using any other class, within Parcel1:
     public void ship(String dest) {
-        Contents c = contents();
-        Destination d = to(dest);
+        Contents c = new Contents();
+        System.out.println(c.value());
+        Destination d = new Destination(dest);
         System.out.println(d.readLabel());
     }
 
     public static void main(String[] args) {
-        Parcel2 p = new Parcel2();
+        Parcel1 p = new Parcel1();
         p.ship("Tasmania");
-        Parcel2 q = new Parcel2();
-        // Defining references to inner classes:
-        Contents c = q.contents();
-        Destination d = q.to("Borneo");
     }
 }
