@@ -25,6 +25,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
         return Integer.compare(arg.priority, priority);
     }
 
+    // do nothing but sleep
     public void run() {
         try {
             TimeUnit.MILLISECONDS.sleep(rand.nextInt(250));
@@ -35,14 +36,14 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
     }
 
     public String toString() {
-        return String.format("[%1$-3d]", priority) +
-                " Task " + id;
+        return String.format("[%1$-3d]", priority) + " Task " + id;
     }
 
     public String summary() {
         return "(" + id + ":" + priority + ")";
     }
 
+    // Nested class，同时又继承了PrioritizedTask
     public static class EndSentinel extends PrioritizedTask {
         private ExecutorService exec;
 
@@ -54,7 +55,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
         public void run() {
             int count = 0;
             for (PrioritizedTask pt : sequence) {
-                System.out.println(pt.summary());
+                System.out.print(pt.summary());
                 if (++count % 5 == 0) {
                     System.out.println();
                 }
