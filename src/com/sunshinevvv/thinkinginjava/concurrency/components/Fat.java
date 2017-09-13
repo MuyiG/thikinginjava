@@ -12,12 +12,8 @@ public class Fat {
         }
     }
 
-    public void operation() {
-        System.out.println(this);
-    }
-
     public String toString() {
-        return "Fat id: " + id;
+        return "Fat" + id;
     }
 
 }

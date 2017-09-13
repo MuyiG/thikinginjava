@@ -38,20 +38,20 @@ public class SemaphoreDemo {
     final static int SIZE = 25;
 
     public static void main(String[] args) throws Exception {
-        final Pool<Fat> pool =
-                new Pool<Fat>(Fat.class, SIZE);
+        final Pool<Fat> pool = new Pool<>(Fat.class, SIZE);
         ExecutorService exec = Executors.newCachedThreadPool();
         for (int i = 0; i < SIZE; i++) {
-            exec.execute(new CheckoutTask<Fat>(pool));
+            exec.execute(new CheckoutTask<>(pool));
         }
         System.out.println("All CheckoutTasks created");
-        List<Fat> list = new ArrayList<Fat>();
+
+        List<Fat> list = new ArrayList<>();
         for (int i = 0; i < SIZE; i++) {
             Fat f = pool.checkOut();
-            System.out.println(i + ": main() thread checked out ");
-            f.operation();
+            System.out.println(i + ": main() thread checked out " + f);
             list.add(f);
         }
+
         Future<?> blocked = exec.submit(new Runnable() {
             public void run() {
                 try {
@@ -64,6 +64,7 @@ public class SemaphoreDemo {
         });
         TimeUnit.SECONDS.sleep(2);
         blocked.cancel(true); // Break out of blocked call
+
         System.out.println("Checking in objects in " + list);
         for (Fat f : list) {
             pool.checkIn(f);

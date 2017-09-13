@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
+/**
+ * 借助Semaphore实现的一个简易线程安全的对象池
+ * @param <T>
+ */
 public class Pool<T> {
     private int size;
     private List<T> items = new ArrayList<>();
