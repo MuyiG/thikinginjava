@@ -13,7 +13,6 @@ class Car {
         waxOn = true; // Ready to buff
         notifyAll();
     }
-
     public synchronized void buffed() {
         waxOn = false; // Ready for another coat of wax
         notifyAll();
@@ -25,7 +24,6 @@ class Car {
             wait();
         }
     }
-
     public synchronized void waitForBuffing() throws InterruptedException {
         while (waxOn == true) {
             wait();
@@ -44,7 +42,7 @@ class WaxOn implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 System.out.println("Wax On! ");
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(100);
                 car.waxed();
                 car.waitForBuffing();
             }
@@ -68,7 +66,7 @@ class WaxOff implements Runnable {
             while (!Thread.interrupted()) {
                 car.waitForWaxing();
                 System.out.println("Wax Off! ");
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(100);
                 car.buffed();
             }
         } catch (InterruptedException e) {
