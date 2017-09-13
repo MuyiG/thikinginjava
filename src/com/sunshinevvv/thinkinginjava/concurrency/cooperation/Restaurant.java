@@ -4,12 +4,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 生产者-消费者模型的一个例子
+ */
+
 class Meal {
     private final int orderNum;
 
     public Meal(int orderNum) {
         this.orderNum = orderNum;
-        System.out.println("New meal " + orderNum);
+        System.out.println(this + " is made!");
     }
 
     public String toString() {
