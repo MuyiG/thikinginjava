@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
- * 借助Semaphore实现的一个简易线程安全的对象池
+ * 借助Semaphore实现的一个简易线程安全的对象池。
+ * Semaphore可以理解为一个Lock/Synchronized的复数版，最多可以同时允许n个线程访问资源，当n=1时，Semaphore退化为Lock。
  * @param <T>
  */
 public class Pool<T> {
