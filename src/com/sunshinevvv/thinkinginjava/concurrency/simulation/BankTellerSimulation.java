@@ -74,7 +74,7 @@ class Teller implements Runnable, Comparable<Teller> {
     // Customers served during this shift:
     private int customersServed = 0;
     private CustomerLine customers;
-    private boolean servingCustomerLine = true;
+    private boolean serving = true;
 
     public Teller(CustomerLine cq) {
         customers = cq;
@@ -84,10 +84,10 @@ class Teller implements Runnable, Comparable<Teller> {
         try {
             while (!Thread.interrupted()) {
                 Customer customer = customers.take();
-                TimeUnit.MILLISECONDS.sleep(customer.getServiceTime());
+                TimeUnit.MILLISECONDS.sleep(customer.getServiceTime()); // 模拟服务的过程
                 synchronized (this) {
                     customersServed++;
-                    while (!servingCustomerLine)
+                    while (!serving)
                         wait();
                 }
             }
@@ -99,12 +99,12 @@ class Teller implements Runnable, Comparable<Teller> {
 
     public synchronized void doSomethingElse() {
         customersServed = 0;
-        servingCustomerLine = false;
+        serving = false;
     }
 
     public synchronized void serveCustomerLine() {
-        assert !servingCustomerLine : "already serving: " + this;
-        servingCustomerLine = true;
+        assert !serving : "already serving: " + this;
+        serving = true;
         notifyAll();
     }
 
@@ -126,8 +126,7 @@ class TellerManager implements Runnable {
     private ExecutorService exec;
     private CustomerLine customers;
     private PriorityQueue<Teller> workingTellers = new PriorityQueue<>();
-    private Queue<Teller> tellersDoingOtherThings =
-            new LinkedList<>();
+    private Queue<Teller> tellersDoingOtherThings = new LinkedList<>();
     private int adjustmentPeriod;
 
     public TellerManager(ExecutorService e, CustomerLine customers, int adjustmentPeriod) {
