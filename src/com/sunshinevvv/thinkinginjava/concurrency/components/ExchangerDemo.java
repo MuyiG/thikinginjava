@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * Exchanger是一个进行PY的地方，允许线程在这个区域里进行对象的交换。
+ * Exchanger是一个进行PY的地方，允许线程在这个区域里进行对象的交换。暂时不太清楚有什么优点。
  *
  * Created by sunshine on 2017/9/14.
  */
