@@ -30,6 +30,7 @@ class Customer {
 }
 
 // Teach the customer line to display itself:
+// 因为会被多线程并发访问，所以用了线程安全的ArrayBlockingQueue
 class CustomerLine extends ArrayBlockingQueue<Customer> {
     public CustomerLine(int maxLineSize) {
         super(maxLineSize);
@@ -51,7 +52,7 @@ class CustomerGenerator implements Runnable {
     private static Random rand = new Random(47);
 
     public CustomerGenerator(CustomerLine cq) {
-            customers = cq;
+        customers = cq;
     }
 
     public void run() {
@@ -86,7 +87,7 @@ class Teller implements Runnable, Comparable<Teller> {
                 Customer customer = customers.take();
                 TimeUnit.MILLISECONDS.sleep(customer.getServiceTime()); // 模拟服务的过程
                 synchronized (this) {
-                    customersServed++;
+                    customersServed++; // 会和TellerManager线程并发访问此字段，所以需要同步synchronized
                     while (!serving)
                         wait();
                 }
@@ -97,11 +98,11 @@ class Teller implements Runnable, Comparable<Teller> {
         System.out.println(this + "terminating");
     }
 
+    // 这两个方法，会执行在TellerManager线程里，所以需要synchronized，否则会造成不一致
     public synchronized void doSomethingElse() {
         customersServed = 0;
         serving = false;
     }
-
     public synchronized void serveCustomerLine() {
         assert !serving : "already serving: " + this;
         serving = true;
@@ -109,10 +110,6 @@ class Teller implements Runnable, Comparable<Teller> {
     }
 
     public String toString() {
-        return "Teller " + id + " ";
-    }
-
-    public String shortString() {
         return "T" + id;
     }
 
@@ -125,28 +122,31 @@ class Teller implements Runnable, Comparable<Teller> {
 class TellerManager implements Runnable {
     private ExecutorService exec;
     private CustomerLine customers;
+    private int adjustmentPeriod;
+
+    // 用两个Queue存储工作中的和空闲的Teller，但是PriorityQueue和LinkedList非线程安全？因为只有一个TellerManager线程会操作这两个Queue，所以不存在多线程并发问题。
     private PriorityQueue<Teller> workingTellers = new PriorityQueue<>();
     private Queue<Teller> tellersDoingOtherThings = new LinkedList<>();
-    private int adjustmentPeriod;
 
     public TellerManager(ExecutorService e, CustomerLine customers, int adjustmentPeriod) {
         exec = e;
         this.customers = customers;
         this.adjustmentPeriod = adjustmentPeriod;
+
         // Start with a single teller:
         Teller teller = new Teller(customers);
         exec.execute(teller);
         workingTellers.add(teller);
     }
 
+    /**
+     * This is actually a control system. By adjusting the numbers,
+     * you can reveal stability issues in the control mechanism.
+     */
     public void adjustTellerNumber() {
-        // This is actually a control system. By adjusting
-        // the numbers, you can reveal stability issues in
-        // the control mechanism.
         // If line is too long, add another teller:
         if (customers.size() / workingTellers.size() > 2) {
-            // If tellers are on break or doing
-            // another job, bring one back:
+            // If tellers are doing another job, bring one back:
             if (tellersDoingOtherThings.size() > 0) {
                 Teller teller = tellersDoingOtherThings.remove();
                 teller.serveCustomerLine();
@@ -160,13 +160,15 @@ class TellerManager implements Runnable {
             return;
         }
         // If line is short enough, remove a teller:
-        if (workingTellers.size() > 1 &&
-                customers.size() / workingTellers.size() < 2)
+        if (workingTellers.size() > 1 && customers.size() / workingTellers.size() < 2) {
             reassignOneTeller();
+        }
         // If there is no line, we only need one teller:
-        if (customers.size() == 0)
-            while (workingTellers.size() > 1)
+        if (customers.size() == 0) {
+            while (workingTellers.size() > 1) {
                 reassignOneTeller();
+            }
+        }
     }
 
     // Give a teller a different job or a break:
@@ -180,10 +182,12 @@ class TellerManager implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 TimeUnit.MILLISECONDS.sleep(adjustmentPeriod);
+
                 adjustTellerNumber();
-                System.out.print(customers + " { ");
+
+                System.out.print("CustomerLine:" + customers + " , Tellers: { ");
                 for (Teller teller : workingTellers)
-                    System.out.print(teller.shortString() + " ");
+                    System.out.print(teller + " ");
                 System.out.println("}");
             }
         } catch (InterruptedException e) {
@@ -204,18 +208,13 @@ public class BankTellerSimulation {
     public static void main(String[] args) throws Exception {
         ExecutorService exec = Executors.newCachedThreadPool();
         // If line is too long, customers will leave:
-        CustomerLine customers =
-                new CustomerLine(MAX_LINE_SIZE);
+        CustomerLine customers = new CustomerLine(MAX_LINE_SIZE);
         exec.execute(new CustomerGenerator(customers));
         // Manager will add and remove tellers as necessary:
-        exec.execute(new TellerManager(
-                exec, customers, ADJUSTMENT_PERIOD));
-        if (args.length > 0) // Optional argument
-            TimeUnit.SECONDS.sleep(new Integer(args[0]));
-        else {
-            System.out.println("Press ‘Enter’ to quit");
-            System.in.read();
-        }
+        exec.execute(new TellerManager(exec, customers, ADJUSTMENT_PERIOD));
+
+        System.out.println("Press ‘Enter’ to quit");
+        System.in.read();
         exec.shutdownNow();
     }
 }
