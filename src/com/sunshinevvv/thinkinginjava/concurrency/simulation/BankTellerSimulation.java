@@ -113,7 +113,7 @@ class Teller implements Runnable, Comparable<Teller> {
         return "T" + id;
     }
 
-    // Used by priority queue:
+    // Used by priority queue: 这里也要synchronized？
     public synchronized int compareTo(Teller other) {
         return Integer.compare(customersServed, other.customersServed);
     }
@@ -181,10 +181,11 @@ class TellerManager implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
+                // 每adjustmentPeriod ms 调整一次
                 TimeUnit.MILLISECONDS.sleep(adjustmentPeriod);
-
                 adjustTellerNumber();
 
+                // 输出结果
                 System.out.print("CustomerLine:" + customers + " , Tellers: { ");
                 for (Teller teller : workingTellers)
                     System.out.print(teller + " ");
@@ -202,13 +203,13 @@ class TellerManager implements Runnable {
 }
 
 public class BankTellerSimulation {
-    static final int MAX_LINE_SIZE = 50;
+    static final int MAX_LINE_SIZE = 5;
     static final int ADJUSTMENT_PERIOD = 1000;
 
     public static void main(String[] args) throws Exception {
         ExecutorService exec = Executors.newCachedThreadPool();
-        // If line is too long, customers will leave:
-        CustomerLine customers = new CustomerLine(MAX_LINE_SIZE);
+        // If line is too long, customers will leave: 但这里的实现还是会阻塞等待的啊
+        CustomerLine customers = new CustomerLine(MAX_LINE_SIZE * 2);
         exec.execute(new CustomerGenerator(customers));
         // Manager will add and remove tellers as necessary:
         exec.execute(new TellerManager(exec, customers, ADJUSTMENT_PERIOD));
