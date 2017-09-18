@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.concurrency.simulation;
+package com.sunshinevvv.thinkinginjava.concurrency.simulation.bank;
 
 import java.util.LinkedList;
 import java.util.PriorityQueue;

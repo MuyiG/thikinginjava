@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 生产者-消费者模型的一个例子
+ * 生产者-消费者模型的一个简单例子
  */
 
 class Meal {
@@ -28,6 +28,9 @@ class WaitPerson implements Runnable {
         restaurant = r;
     }
 
+    /**
+     * 这里的synchronized只是为了wait/notify而设的，实际上并无同步的必要
+     */
     public void run() {
         try {
             while (!Thread.interrupted()) {
