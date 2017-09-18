@@ -9,17 +9,16 @@ import java.util.concurrent.*;
  */
 public class CarBuilder {
     public static void main(String[] args) throws Exception {
-        CarQueue chassisQueue = new CarQueue(),
-                finishingQueue = new CarQueue();
+        LinkedBlockingDeque<Car> chassisQueue = new LinkedBlockingDeque<>(),
+                finishingQueue = new LinkedBlockingDeque<>();
         ExecutorService exec = Executors.newCachedThreadPool();
         RobotPool robotPool = new RobotPool();
+        exec.execute(new ChassisBuilder(chassisQueue));
         exec.execute(new EngineRobot(robotPool));
         exec.execute(new DriveTrainRobot(robotPool));
         exec.execute(new WheelRobot(robotPool));
         exec.execute(new Assembler(chassisQueue, finishingQueue, robotPool));
         exec.execute(new Reporter(finishingQueue));
-        // Start everything running by producing chassis:
-        exec.execute(new ChassisBuilder(chassisQueue));
         TimeUnit.SECONDS.sleep(7);
         exec.shutdownNow();
     }
@@ -32,10 +31,6 @@ class Car {
 
     public Car(int id) {
         this.id = id;
-    }
-
-    public Car() {
-        id = -1;
     }
 
     public int getId() {
@@ -60,14 +55,11 @@ class Car {
     }
 }
 
-class CarQueue extends LinkedBlockingDeque<Car> {
-}
-
 class ChassisBuilder implements Runnable {
-    private CarQueue carQueue;
+    private LinkedBlockingDeque<Car> carQueue;
     private int counter = 0;
 
-    public ChassisBuilder(CarQueue carQueue) {
+    public ChassisBuilder(LinkedBlockingDeque<Car> carQueue) {
         this.carQueue = carQueue;
     }
 
@@ -88,12 +80,12 @@ class ChassisBuilder implements Runnable {
 }
 
 class Assembler implements Runnable {
-    private CarQueue chassisQueue, finishingQueue;
+    private LinkedBlockingDeque<Car> chassisQueue, finishingQueue;
     private Car car;
     private CyclicBarrier barrier = new CyclicBarrier(4);
     private RobotPool robotPool;
 
-    public Assembler(CarQueue cq, CarQueue fq, RobotPool rp) {
+    public Assembler(LinkedBlockingDeque<Car> cq, LinkedBlockingDeque<Car> fq, RobotPool rp) {
         chassisQueue = cq;
         finishingQueue = fq;
         robotPool = rp;
@@ -131,9 +123,9 @@ class Assembler implements Runnable {
 }
 
 class Reporter implements Runnable {
-    private CarQueue carQueue;
+    private LinkedBlockingDeque<Car> carQueue;
 
-    public Reporter(CarQueue cq) {
+    public Reporter(LinkedBlockingDeque<Car> cq) {
         carQueue = cq;
     }
 
@@ -240,16 +232,14 @@ class WheelRobot extends Robot {
 
 class RobotPool {
     // Quietly prevents identical entries:
-    private Set<Robot> pool = new HashSet<Robot>();
+    private Set<Robot> pool = new HashSet<>();
 
     public synchronized void add(Robot r) {
         pool.add(r);
         notifyAll();
     }
 
-    public synchronized void
-    hire(Class<? extends Robot> robotType, Assembler d)
-            throws InterruptedException {
+    public synchronized void hire(Class<? extends Robot> robotType, Assembler d) throws InterruptedException {
         for (Robot r : pool)
             if (r.getClass().equals(robotType)) {
                 pool.remove(r);
