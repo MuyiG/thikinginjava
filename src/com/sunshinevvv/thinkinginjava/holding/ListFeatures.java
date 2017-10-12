@@ -8,8 +8,9 @@ import java.util.*;
  */
 public class ListFeatures {
     public static void main(String[] args) {
-        features();
-        foreach();
+//        features();
+//        foreach();
+        contains();
     }
 
     private static void features() {
@@ -79,5 +80,13 @@ public class ListFeatures {
         for (String s : testList) {
             System.out.printf(s);
         }
+    }
+
+    private static void contains() {
+        List<Integer> integers = new ArrayList<>();
+        integers.add(new Integer(1));
+        integers.add(new Integer(2));
+        System.out.println(integers.contains(new Integer(1)));
+        System.out.println(integers.contains(1));
     }
 }
