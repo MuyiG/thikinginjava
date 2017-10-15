@@ -8,4 +8,5 @@ public class BitTest {
         int i = 16385;
         System.out.println(i & 16384);
     }
+
 }
