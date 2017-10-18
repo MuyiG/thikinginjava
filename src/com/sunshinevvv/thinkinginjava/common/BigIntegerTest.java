@@ -14,5 +14,7 @@ public class BigIntegerTest {
         BigDecimal b1 = new BigDecimal("14.9");
         System.out.println(b1.multiply(new BigDecimal("100")).longValue());
         System.out.println(b1.longValue() * 100); // 精度丢失
+
+        // new BigInteger("vdian1011576814"); // 报错：java.lang.NumberFormatException: For input string: "vdian1"
     }
 }
