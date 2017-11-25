@@ -8,5 +8,6 @@ import java.util.Date;
 public class DateTest {
     public static void main(String[] args) {
         System.out.println(new Date().getTime());
+        System.out.printf("ha\nha\nha\n");
     }
 }
