@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.holding;
+package com.sunshinevvv.thinkinginjava.containers;
 
 import java.util.Collections;
 import java.util.LinkedList;
