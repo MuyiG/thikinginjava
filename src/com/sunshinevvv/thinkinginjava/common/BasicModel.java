@@ -8,6 +8,8 @@ import java.util.List;
  * 测试用基本Model
  */
 public class BasicModel {
+    public static final int CONST_INT = 1;
+
     private String name;
     private int no;
 
