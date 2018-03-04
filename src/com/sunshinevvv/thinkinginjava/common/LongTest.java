@@ -17,5 +17,8 @@ public class LongTest {
         System.out.println(l2.equals(integer));
         System.out.println(l2.equals(2));
         System.out.println(l2.equals(2L));
+
+        Long l = (Long) null;
+        System.out.println(l);
     }
 }

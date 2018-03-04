@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.holding;
+package com.sunshinevvv.thinkinginjava.containers;
 
 import com.sunshinevvv.thinkinginjava.common.BasicModel;
 
