@@ -1,5 +1,8 @@
 package com.sunshinevvv.thinkinginjava.innerclass;
 
+/**
+ * 定义在另一个类的文件里，作用域为default，仅同package的类可见。
+ */
 interface Selector {
     boolean end();
 

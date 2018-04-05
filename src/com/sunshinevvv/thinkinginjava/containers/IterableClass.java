@@ -25,6 +25,11 @@ public class IterableClass implements Iterable<String> {
             public String next() {
                 return words[index++];
             }
+
+            @Override
+            public void remove() {
+
+            }
         };
     }
 
