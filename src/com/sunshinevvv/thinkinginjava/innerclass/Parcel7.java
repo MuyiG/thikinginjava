@@ -6,12 +6,12 @@ import com.sunshinevvv.thinkinginjava.common.BasicModel;
  * 匿名内部类的用法
  */
 public class Parcel7 {
-    // 内部类引用到的成员变量不需要声明为final
+    // 内部类引用到的成员变量不需要声明为final，因为内部类包含外部类实例的引用，可以通过引用获取到成员变量，capture-by-reference方式，没有同步问题。
     private int j = 2;
     BasicModel model = new BasicModel("field", 3);
 
     public Contents contents() {
-        // 内部类引用到的方法内的局部变量必须声明为final
+        // 内部类引用到的方法内的局部变量必须声明为final，因为这里的变量访问是通过capture-by-value的方式进行的，无法进行同步，Java为了省事直接强制城final了。
         final int k = 4;
         final BasicModel localModel = new BasicModel("local", 7);
 
