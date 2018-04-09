@@ -14,6 +14,7 @@ public class AddingGroups {
         collection.addAll(Arrays.asList(moreInts));
 
         // Runs significantly faster, but you can’t construct a Collection this way:
+        // 关于原因的解释参见：https://stackoverflow.com/questions/3343766/why-is-collections-addall-supposed-to-be-faster-than-c-addall
         Collections.addAll(collection, 11, 12, 13, 14, 15);
         Collections.addAll(collection, moreInts);
 
