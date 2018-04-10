@@ -10,15 +10,6 @@ import java.util.List;
  */
 public class SubList {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, "a","b","c","d");
-        List<String> subList = list.subList(1, 3);
-        System.out.println("List:" + list + ", subList:" + subList);
-        subList.set(0, "e");
-        System.out.println("List:" + list + ", subList:" + subList);
-        subList.add("f");
-        System.out.println("List:" + list + ", subList:" + subList);
-        list = list.subList(0, 3);
-        System.out.println("List:" + list);
+
     }
 }

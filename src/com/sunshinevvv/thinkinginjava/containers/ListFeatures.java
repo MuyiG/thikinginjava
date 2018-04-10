@@ -4,15 +4,21 @@ import java.util.*;
 
 /**
  * Created by 光 on 2016/10/5.
- * 需要特别注意的是，对于subList所做的修改，都会同样作用于原List，可以参见Demo：SubList.java
  */
 public class ListFeatures {
     public static void main(String[] args) {
-//        features();
+        features();
 //        foreach();
-        contains();
+//        contains();
     }
 
+    /**
+     * 很有意思的List特性Quiz，值得多撸几遍。
+     *
+     * 需要特别注意的是：
+     *  1.subList和原List共享数组，所以对于subList所做的任何修改，都会体现在原List上，可以参见Demo：subList()
+     *  2.contains、remove、indexOf比对时都是用equals方法的
+     */
     private static void features() {
         Random rand = new Random(47);
         List<String> pets = new ArrayList<>();
@@ -39,7 +45,7 @@ public class ListFeatures {
         System.out.println("sorted subList: " + sub);
         // Order is not important in containsAll():
         System.out.println("11: " + pets.containsAll(sub));
-        Collections.shuffle(sub, rand); // Mix it up
+//        Collections.shuffle(sub, rand); // Mix it up，为了推算时更可控，注释掉了
         System.out.println("shuffled subList: " + sub);
         System.out.println("12: " + pets.containsAll(sub));
         List<String> copy = new ArrayList<>(pets);
@@ -88,5 +94,18 @@ public class ListFeatures {
         integers.add(new Integer(2));
         System.out.println(integers.contains(new Integer(1)));
         System.out.println(integers.contains(1));
+    }
+
+    private static void subList() {
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, "a","b","c","d");
+        List<String> subList = list.subList(1, 3);
+        System.out.println("List:" + list + ", subList:" + subList);
+        subList.set(0, "e");
+        System.out.println("List:" + list + ", subList:" + subList);
+        subList.add("f");
+        System.out.println("List:" + list + ", subList:" + subList);
+        list = list.subList(0, 3);
+        System.out.println("List:" + list);
     }
 }
