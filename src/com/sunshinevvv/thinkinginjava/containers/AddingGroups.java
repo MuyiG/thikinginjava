@@ -1,5 +1,7 @@
 package com.sunshinevvv.thinkinginjava.containers;
 
+import com.sunshinevvv.thinkinginjava.common.BasicModel;
+
 import java.util.*;
 
 /**
@@ -21,5 +23,15 @@ public class AddingGroups {
         List<Integer> list = Arrays.asList(16, 17, 18, 19, 20);
         list.set(1, 99); // OK -- modify an element
         // list.add(21); // Runtime error because the underlying array cannot be resized.
+
+        BasicModel basicModel = new BasicModel("Tom", 111);
+        List<BasicModel> list1 = new ArrayList<>();
+        List<BasicModel> list2 = new ArrayList<>();
+        list1.add(basicModel);
+        list2.addAll(list1);
+        list2.get(0).setNo(222);
+        System.out.println(list1.get(0).getNo());
+
+
     }
 }
