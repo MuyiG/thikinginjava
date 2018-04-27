@@ -26,9 +26,9 @@ public class PriorityQueueDemo {
 
         List<Integer> ints = Arrays.asList(25, 22, 20,
                 18, 14, 9, 3, 1, 1, 2, 3, 9, 14, 18, 21, 23, 25);
-        priorityQueue = new PriorityQueue<Integer>(ints);
+        priorityQueue = new PriorityQueue<>(ints);
         printQueue(priorityQueue);
-        priorityQueue = new PriorityQueue<Integer>(
+        priorityQueue = new PriorityQueue<>(
                 ints.size(), Collections.reverseOrder());
         priorityQueue.addAll(ints);
         printQueue(priorityQueue);
@@ -36,20 +36,20 @@ public class PriorityQueueDemo {
         // Queue允许重复
         String fact = "EDUCATION SHOULD ESCHEW OBFUSCATION";
         List<String> strings = Arrays.asList(fact.split(""));
-        PriorityQueue<String> stringPQ =
-                new PriorityQueue<String>(strings);
+        PriorityQueue<String> stringPQ = new PriorityQueue<>(strings);
         printQueue(stringPQ);
-        stringPQ = new PriorityQueue<String>(
-                strings.size(), Collections.reverseOrder());
+        stringPQ = new PriorityQueue<>(strings.size(), Collections.reverseOrder());
         stringPQ.addAll(strings);
         printQueue(stringPQ);
 
         // 一种消除重复的手段是提前用Set处理
-        Set<Character> charSet = new HashSet<Character>();
+        Set<Character> charSet = new HashSet<>();
         for(char c : fact.toCharArray())
             charSet.add(c); // Autoboxing
-        PriorityQueue<Character> characterPQ =
-                new PriorityQueue<Character>(charSet);
+        PriorityQueue<Character> characterPQ = new PriorityQueue<>(charSet);
+        printQueue(characterPQ);
+        characterPQ = new PriorityQueue<>(Collections.reverseOrder());
+        characterPQ.addAll(charSet);
         printQueue(characterPQ);
     }
 

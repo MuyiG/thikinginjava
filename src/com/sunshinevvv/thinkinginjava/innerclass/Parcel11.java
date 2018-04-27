@@ -1,6 +1,7 @@
 package com.sunshinevvv.thinkinginjava.innerclass;
 
 public class Parcel11 {
+
     private static class ParcelContents implements Contents {
         private int i = 11;
 

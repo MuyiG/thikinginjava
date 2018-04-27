@@ -1,5 +1,8 @@
 package com.sunshinevvv.thinkinginjava.innerclass;
 
+/**
+ * 定义在另一个类的文件里，作用域为default，仅同package的类可见。
+ */
 interface Selector {
     boolean end();
 
@@ -43,8 +46,30 @@ public class Sequence {
         }
     }
 
+    private class ReverseSequenceSelector implements Selector {
+        private int i = items.length - 1;
+
+        public boolean end() {
+            return i < 0 ;
+        }
+
+        public Object current() {
+            return items[i];
+        }
+
+        public void next() {
+            if (i >= 0) {
+                i--;
+            }
+        }
+    }
+
     public Selector selector() {
         return new SequenceSelector();
+    }
+
+    public Selector reverseSelector() {
+        return new ReverseSequenceSelector();
     }
 
     public static void main(String[] args) {
@@ -53,6 +78,12 @@ public class Sequence {
             sequence.add(Integer.toString(i));
         }
         Selector selector = sequence.selector();
+        while (!selector.end()) {
+            System.out.print(selector.current() + " ");
+            selector.next();
+        }
+
+        selector = sequence.reverseSelector();
         while (!selector.end()) {
             System.out.print(selector.current() + " ");
             selector.next();
