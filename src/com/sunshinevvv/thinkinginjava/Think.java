@@ -1,7 +1,7 @@
 package com.sunshinevvv.thinkinginjava;
 
 /**
- * Created by 光 on 2016/8/20.
+ * Created by on 2016/8/20.
  */
 public class Think {
 
