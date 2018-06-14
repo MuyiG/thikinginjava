@@ -5,5 +5,10 @@ public class CommonTest {
         String s = "aaaa";
         s.replace("aa", "b");
         System.out.println(s);
+
+        String n = null;
+        if (n instanceof String) {
+            System.out.println("null instanceof String");
+        }
     }
 }
