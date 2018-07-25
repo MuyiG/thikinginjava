@@ -20,5 +20,9 @@ public class LongTest {
 
         Long l = (Long) null;
         System.out.println(l);
+
+        Long l4 = 11111L;
+        Long l5 = 11111L;
+        System.out.println(l4 == l5);
     }
 }
