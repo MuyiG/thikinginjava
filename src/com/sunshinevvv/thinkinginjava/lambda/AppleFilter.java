@@ -1,6 +1,7 @@
 package com.sunshinevvv.thinkinginjava.lambda;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class AppleFilter {
@@ -56,5 +57,13 @@ public class AppleFilter {
         });
 
         filterApples(apples, (Apple apple) -> apple.getColor().equals("Green") && apple.getWeight() >= 150);
+
+        apples.sort(new Comparator<Apple>() {
+            public int compare(Apple a1, Apple a2) {
+                return a1.getWeight().compareTo(a2.getWeight());
+            }
+        });
+
+        apples.sort(Comparator.comparing(Apple::getWeight));
     }
 }
