@@ -37,6 +37,11 @@ public class EraseTest {
         erasure1.setObject("haha");
         String s = (String) erasure1.getObject();
         System.out.println(s);
+
+        Erasure[] erasures = new Erasure[10]; // OK
+//        Erasure<String>[] erasures2 = new Erasure<String>[10]; // compile error
+        Erasure<String>[] erasures3 = (Erasure<String>[]) new Erasure[10]; // work around
+        erasures3[0] = new Erasure<>("");
     }
 }
 
@@ -62,4 +67,3 @@ class IntegerErasure extends Erasure<Integer> {
         super(object);
     }
 }
-
