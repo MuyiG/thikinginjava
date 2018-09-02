@@ -5,7 +5,7 @@ public class ArrayOfGenericType<T> {
 
     @SuppressWarnings("unchecked")
     public ArrayOfGenericType(int size) {
-        //! array = new T[size]; // Illegal
+        // array = new T[size]; // Illegal
         array = (T[]) new Object[size];// "unchecked" Warning
     }
 

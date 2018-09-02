@@ -31,10 +31,10 @@ public class EraseTest {
         IntegerErasure integerErasure = new IntegerErasure(1);
 //        integerErasure.setObject("haha"); // compile error
         Erasure erasure1 = integerErasure;
-        for (Method method : erasure1.getClass().getMethods()) {
+        for (Method method : erasure1.getClass().getDeclaredMethods()) {
             System.out.println("Method :" + method);
         }
-        erasure1.setObject("haha");
+        erasure1.setObject("haha"); // 成功绕过编译期检查
         String s = (String) erasure1.getObject();
         System.out.println(s);
 
@@ -42,6 +42,7 @@ public class EraseTest {
 //        Erasure<String>[] erasures2 = new Erasure<String>[10]; // compile error
         Erasure<String>[] erasures3 = (Erasure<String>[]) new Erasure[10]; // work around
         erasures3[0] = new Erasure<>("");
+//        erasures3[0] = new Erasure<>(1); // compile error
     }
 }
 
