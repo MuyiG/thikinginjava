@@ -14,4 +14,10 @@ public class Enums {
     public static <T> T random(T[] values) {
         return values[rand.nextInt(values.length)];
     }
+
+    public static void main(String[] args) {
+        Course course1 = Course.MAINCOURSE;
+        Course course2 = Course.MAINCOURSE;
+        System.out.println(course1 == course2);
+    }
 }
