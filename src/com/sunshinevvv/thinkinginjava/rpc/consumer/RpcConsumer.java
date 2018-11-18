@@ -1,4 +1,7 @@
-package com.sunshinevvv.thinkinginjava.rpc;
+package com.sunshinevvv.thinkinginjava.rpc.consumer;
+
+import com.sunshinevvv.thinkinginjava.rpc.RpcFramework;
+import com.sunshinevvv.thinkinginjava.rpc.api.HelloService;
 
 public class RpcConsumer {
     public static void main(String[] args) throws Exception {
