@@ -1,5 +1,8 @@
 package com.sunshinevvv.thinkinginjava.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AutoBoxTest {
     public static void main(String[] args) {
         Integer integer1 = 1;
@@ -29,5 +32,12 @@ public class AutoBoxTest {
         System.out.println("基本类型和new出的对象   equal判断" + (a.equals(d)));
         System.out.println("基本类型和自动装箱的对象   ==判断" + (d == c));
         System.out.println("基本类型和自动装箱的对象   equal判断" + (c.equals(d)));
+
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(1);
+        integerList.add(2);
+        integerList.add(3);
+        System.out.println(integerList.contains(2));
+        System.out.println(integerList.contains(4));
     }
 }
