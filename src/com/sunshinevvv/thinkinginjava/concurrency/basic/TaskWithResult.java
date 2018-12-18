@@ -16,7 +16,8 @@ public class TaskWithResult implements Callable<String> {
         try {
             TimeUnit.MILLISECONDS.sleep(100L);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         return "Result of TaskWithResult " + id;
     }
