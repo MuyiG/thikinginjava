@@ -10,7 +10,7 @@ public class LiftOff implements Runnable {
     private final int id = num++;
 
     public void status() {
-        System.out.println("#" + id + " " + (countDown > 0 ? countDown : "Lift off!"));
+        System.out.println("#" + id + "(" + (countDown > 0 ? countDown : "Lift off!") + ") ");
     }
 
     @Override
