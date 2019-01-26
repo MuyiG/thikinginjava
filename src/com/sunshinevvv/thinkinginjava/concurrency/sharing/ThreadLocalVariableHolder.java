@@ -32,6 +32,8 @@ class Accessor implements Runnable {
 }
 
 public class ThreadLocalVariableHolder {
+    // ThreadLocal objects are usually stored as static fields
+    // 但这并非强制约束，直接使用非静态的成员变量也是OK的，只是静态变量无需拿到类的实例即可使用，会更方便一些。
     private static ThreadLocal<Integer> value =
             new ThreadLocal<>() {
                 private Random rand = new Random(47);
