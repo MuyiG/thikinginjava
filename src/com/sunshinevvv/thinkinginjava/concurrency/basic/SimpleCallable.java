@@ -3,22 +3,21 @@ package com.sunshinevvv.thinkinginjava.concurrency.basic;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-public class TaskWithResult implements Callable<String> {
+public class SimpleCallable implements Callable<String> {
 
     private int id;
 
-    public TaskWithResult(int id) {
+    public SimpleCallable(int id) {
         this.id = id;
     }
 
     @Override
-    public String call() throws Exception {
+    public String call() {
         try {
             TimeUnit.MILLISECONDS.sleep(100L);
         } catch (InterruptedException e) {
-//            e.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        return "Result of TaskWithResult " + id;
+        return "Result of SimpleCallable " + id;
     }
 }

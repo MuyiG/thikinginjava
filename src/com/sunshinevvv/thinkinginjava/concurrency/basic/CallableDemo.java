@@ -10,7 +10,7 @@ public class CallableDemo {
         ExecutorService exec = Executors.newCachedThreadPool();
         ArrayList<Future<String>> result = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            result.add(exec.submit(new TaskWithResult(i)));
+            result.add(exec.submit(new SimpleCallable(i)));
         }
         for (Future<String> fs : result) {
             try {

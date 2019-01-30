@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Thread local storage is a mechanism that automatically creates different storage for the same variable, for each different thread that uses an object.
+ *
  * Created by sunshine on 2017/8/15.
  */
 class Accessor implements Runnable {
@@ -30,10 +32,15 @@ class Accessor implements Runnable {
 }
 
 public class ThreadLocalVariableHolder {
+    // ThreadLocal objects are usually stored as static fields
+    // 但这并非强制约束，直接使用非静态的成员变量也是OK的，只是静态变量无需拿到类的实例即可使用，会更方便一些。
     private static ThreadLocal<Integer> value =
-            new ThreadLocal<Integer>() {
+            new ThreadLocal<>() {
                 private Random rand = new Random(47);
 
+                /**
+                 * 为 ThreadLocal 变量赋初始值的标准写法
+                 */
                 protected synchronized Integer initialValue() {
                     return rand.nextInt(10000);
                 }

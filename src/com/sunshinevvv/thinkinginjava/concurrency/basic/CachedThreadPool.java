@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 public class CachedThreadPool {
     public static void main(String[] args) {
 //        ExecutorService exec = Executors.newCachedThreadPool();
-//        ExecutorService exec = Executors.newFixedThreadPool(5);
-        ExecutorService exec = Executors.newSingleThreadExecutor();
+        ExecutorService exec = Executors.newFixedThreadPool(5);
+//        ExecutorService exec = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 5; i++) {
-            exec.submit(new LiftOff());
+            exec.execute(new LiftOff());
         }
         exec.shutdown();
     }
