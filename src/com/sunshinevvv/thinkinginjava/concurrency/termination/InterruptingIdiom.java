@@ -29,21 +29,21 @@ class Blocked3 implements Runnable {
                 try {
                     System.out.println("Sleeping");
                     TimeUnit.SECONDS.sleep(1);
+
+                    // point2
+                    NeedsCleanup n2 = new NeedsCleanup(2);
+                    // Guarantee proper cleanup of n2:
+                    try {
+                        System.out.println("Calculating");
+                        // A time-consuming, non-blocking operation:
+                        for (int i = 1; i < 2500000; i++)
+                            d = d + (Math.PI + Math.E) / d;
+                        System.out.println("Finished time-consuming operation");
+                    } finally {
+                        n2.cleanup();
+                    }
                 } finally {
                     n1.cleanup();
-                }
-
-                // point2
-                NeedsCleanup n2 = new NeedsCleanup(2);
-                // Guarantee proper cleanup of n2:
-                try {
-                    System.out.println("Calculating");
-                    // A time-consuming, non-blocking operation:
-                    for (int i = 1; i < 2500000; i++)
-                        d = d + (Math.PI + Math.E) / d;
-                    System.out.println("Finished time-consuming operation");
-                } finally {
-                    n2.cleanup();
                 }
             }
             System.out.println("Exiting via while() test");
@@ -57,7 +57,7 @@ public class InterruptingIdiom {
     public static void main(String[] args) throws Exception {
         Thread t = new Thread(new Blocked3());
         t.start();
-        TimeUnit.MILLISECONDS.sleep(1001);
+        TimeUnit.MILLISECONDS.sleep(100);
         t.interrupt();
     }
 }
