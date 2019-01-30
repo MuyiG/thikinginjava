@@ -20,12 +20,13 @@ class Car {
 
     // 这两个wait的作用就是空等，直到自己关心的条件成立
     public synchronized void waitForWaxing() throws InterruptedException {
-        while (waxOn == false) {
+        while (!waxOn) {
+            // wait一般写在一个while语句里，因为有可能wait被notifyAll唤醒之后，发现条件还不适合执行任务，这时候就需要继续wait
             wait();
         }
     }
     public synchronized void waitForBuffing() throws InterruptedException {
-        while (waxOn == true) {
+        while (waxOn) {
             wait();
         }
     }
