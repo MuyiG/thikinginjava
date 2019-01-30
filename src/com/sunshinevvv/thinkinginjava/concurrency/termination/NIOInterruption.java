@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 比CloseResource更加优雅的方式，利用到了Java的NIO，TODO 暂时跳过，后面看过IO章节再来
+ * 比CloseResource更加优雅的方式，Java的NIO提供了对于中断的响应
  */
 class NIOBlocked implements Runnable {
     private final SocketChannel sc;
@@ -48,10 +48,10 @@ public class NIOInterruption {
         Future<?> f = exec.submit(new NIOBlocked(sc1));
         exec.execute(new NIOBlocked(sc2));
         exec.shutdown();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(3);
         // Produce an interrupt via cancel:
         f.cancel(true);
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(3);
         // Release the block by closing the channel:
         sc2.close();
     }

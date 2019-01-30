@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 本机测试显示，关闭System.in后，还需要输入一个回车才会终止程序，why？
+ * 2019-01-30 14:28:50 update：Mac上测试没这个问题
  */
 public class CloseResource {
     public static void main(String[] args) throws Exception {

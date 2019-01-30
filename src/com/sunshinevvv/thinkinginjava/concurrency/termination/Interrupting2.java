@@ -28,10 +28,13 @@ class Blocked2 implements Runnable {
     BlockedMutex blocked = new BlockedMutex();
 
     public void run() {
+        // 如果这么写，就能拿到锁了，因为是Reentrant的：
+//        BlockedMutex blocked = new BlockedMutex();
         System.out.println("Waiting for f() in BlockedMutex");
         blocked.f();
         System.out.println("Broken out of blocked call");
     }
+
 }
 
 public class Interrupting2 {

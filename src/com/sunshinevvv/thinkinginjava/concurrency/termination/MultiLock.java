@@ -15,13 +15,9 @@ public class MultiLock {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         final MultiLock multiLock = new MultiLock();
-        new Thread() {
-            public void run() {
-                multiLock.f1(10);
-            }
-        }.start();
+        new Thread(() -> multiLock.f1(10)).start();
     }
 }
 
