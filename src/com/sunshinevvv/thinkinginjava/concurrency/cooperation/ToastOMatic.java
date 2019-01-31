@@ -52,12 +52,11 @@ class Toaster implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                TimeUnit.MILLISECONDS.sleep(
-                        100 + rand.nextInt(500));
-// Make toast
+                TimeUnit.MILLISECONDS.sleep(100 + rand.nextInt(500));
+                // Make toast
                 Toast t = new Toast(count++);
                 System.out.println(t);
-// Insert into queue
+                // Insert into queue
                 toastQueue.put(t);
             }
         } catch (InterruptedException e) {
@@ -79,7 +78,7 @@ class Butterer implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-// Blocks until next piece of toast is available:
+                // Blocks until next piece of toast is available:
                 Toast t = dryQueue.take();
                 t.butter();
                 System.out.println(t);
@@ -104,7 +103,7 @@ class Jammer implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-// Blocks until next piece of toast is available:
+                // Blocks until next piece of toast is available:
                 Toast t = butteredQueue.take();
                 t.jam();
                 System.out.println(t);
@@ -129,12 +128,10 @@ class Eater implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-// Blocks until next piece of toast is available:
+                // Blocks until next piece of toast is available:
                 Toast t = finishedQueue.take();
-                // Verify that the toast is coming in order,
-// and that all pieces are getting jammed:
-                if (t.getId() != counter++ ||
-                        t.getStatus() != Toast.Status.JAMMED) {
+                // Verify that the toast is coming in order, and that all pieces are getting jammed:
+                if (t.getId() != counter++ || t.getStatus() != Toast.Status.JAMMED) {
                     System.out.println(">>>> Error: " + t);
                     System.exit(1);
                 } else {
