@@ -42,8 +42,8 @@ class WaxOn implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                System.out.println("Wax On! ");
                 TimeUnit.MILLISECONDS.sleep(100);
+                System.out.println(Thread.currentThread() + "Wax On! ");
                 car.waxed();
                 car.waitForBuffing();
             }
@@ -66,8 +66,8 @@ class WaxOff implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 car.waitForWaxing();
-                System.out.println("Wax Off! ");
                 TimeUnit.MILLISECONDS.sleep(100);
+                System.out.println(Thread.currentThread() + "Wax Off! ");
                 car.buffed();
             }
         } catch (InterruptedException e) {
@@ -83,7 +83,7 @@ public class WaxOMatic {
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.execute(new WaxOff(car));
         exec.execute(new WaxOn(car));
-        TimeUnit.SECONDS.sleep(5); // Run for a while...
+        TimeUnit.SECONDS.sleep(1); // Run for a while...
         exec.shutdownNow(); // Interrupt all tasks
     }
 }
