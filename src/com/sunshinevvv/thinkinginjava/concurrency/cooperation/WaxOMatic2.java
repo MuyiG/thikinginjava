@@ -38,7 +38,7 @@ class Car2 {
     public void waitForWaxing() throws InterruptedException {
         lock.lock();
         try {
-            while (waxOn == false) {
+            while (!waxOn) {
                 condition.await();
             }
         } finally {
@@ -49,7 +49,7 @@ class Car2 {
     public void waitForBuffing() throws InterruptedException {
         lock.lock();
         try {
-            while (waxOn == true) {
+            while (waxOn) {
                 condition.await();
             }
         } finally {
