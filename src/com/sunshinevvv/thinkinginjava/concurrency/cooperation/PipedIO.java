@@ -1,51 +1,60 @@
 package com.sunshinevvv.thinkinginjava.concurrency.cooperation;
 
-import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 class Sender implements Runnable {
     private Random rand = new Random(47);
-    private PipedWriter out = new PipedWriter();
-    public PipedWriter getPipedWriter() { return out; }
+//    private PipedWriter out = new PipedWriter();
+//    public PipedWriter getPipedWriter() { return out; }
+
+    private BlockingQueue<Character> queue;
+
+    public Sender(BlockingQueue<Character> queue) {
+        this.queue = queue;
+    }
+
     public void run() {
         try {
             while(true)
                 for(char c = 'A'; c <= 'z'; c++) {
-                out.write(c);
+//                out.write(c);
+                    queue.add(c);
                 TimeUnit.MILLISECONDS.sleep(rand.nextInt(500));
             }
-        } catch(IOException e) {
-            System.out.println(e + " Sender write exception");
-        } catch(InterruptedException e) {
+        }  catch(InterruptedException e) {
             System.out.println(e + " Sender sleep interrupted");
         }
     }
 }
 class Receiver implements Runnable {
-    private PipedReader in;
-    public Receiver(Sender sender) throws IOException {
-        in = new PipedReader(sender.getPipedWriter());
+//    private PipedReader in;
+//    public Receiver(Sender sender) throws IOException {
+//        in = new PipedReader(sender.getPipedWriter());
+//    }
+
+    private BlockingQueue<Character> queue;
+
+    public Receiver(BlockingQueue<Character> queue) {
+        this.queue = queue;
     }
+
     public void run() {
         try {
             while(true) {
                 // Blocks until characters are there:
-                System.out.print("Read: " + (char)in.read() + ", ");
+                System.out.print("Read: " + queue.take() + ", ");
             }
-        } catch(IOException e) {
-            System.out.println(e + " Receiver read exception");
+        } catch(InterruptedException e) {
+            System.out.println(e + " Receiver interrupted");
         }
     }
 }
 public class PipedIO {
     public static void main(String[] args) throws Exception {
-        Sender sender = new Sender();
-        Receiver receiver = new Receiver(sender);
+        BlockingQueue<Character> queue = new LinkedBlockingQueue<>();
+        Sender sender = new Sender(queue);
+        Receiver receiver = new Receiver(queue);
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.execute(sender);
         exec.execute(receiver);
