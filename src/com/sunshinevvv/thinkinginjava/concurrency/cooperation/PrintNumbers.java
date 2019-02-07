@@ -1,13 +1,16 @@
 package com.sunshinevvv.thinkinginjava.concurrency.cooperation;
 
+/**
+ * 这里的两个方法可以不用同步，因为下面的两个线程保证了互斥访问
+ */
 class Number {
     private int value = 0;
 
-    public synchronized void increment() {
+    public void increment() {
         value++;
     }
 
-    public synchronized int getValue() {
+    public int getValue() {
         return value;
     }
 }
