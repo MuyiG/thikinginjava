@@ -1,43 +1,46 @@
 package com.sunshinevvv.thinkinginjava.common;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
 
 public class AutoBoxTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+        testEqual();
+
         Integer integer1 = 1;
-        Integer integer2 = 1;
-        System.out.println(integer1 == integer2);
-        integer1 = 127;
-        integer2 = 127;
-        System.out.println(integer1 == integer2);
-        integer1 = 128;
-        integer2 = 128;
-        System.out.println(integer1 == integer2);
-
-        // 参考文章：https://www.jianshu.com/p/9cb9c61b0986
-        Integer a = new Integer(200);
-        Integer b = new Integer(200);
-        Integer c = 200;
-        Integer e = 200;
-        int d = 200;
-
-        System.out.println("两个new出来的对象    ==判断" + (a == b));
-        System.out.println("两个new出来的对象    equal判断" + a.equals(b));
-        System.out.println("new出的对象和用int赋值的Integer   ==判断" + (a == c));
-        System.out.println("new出的对象和用int赋值的Integer   equal判断" + (a.equals(c)));
-        System.out.println("两个用int赋值的Integer    ==判断" + (c == e));
-        System.out.println("两个用int赋值的Integer    equal判断" + (c.equals(e)));
-        System.out.println("基本类型和new出的对象   ==判断" + (d == a));
-        System.out.println("基本类型和new出的对象   equal判断" + (a.equals(d)));
-        System.out.println("基本类型和自动装箱的对象   ==判断" + (d == c));
-        System.out.println("基本类型和自动装箱的对象   equal判断" + (c.equals(d)));
-
-        List<Integer> integerList = new ArrayList<>();
-        integerList.add(1);
-        integerList.add(2);
-        integerList.add(3);
-        System.out.println(integerList.contains(2));
-        System.out.println(integerList.contains(4));
+        Integer integer2 = 2;
+        System.out.println(integer1 + ", " + integer2);
+        swapInteger(integer1, integer2);
+        System.out.println(integer1 + ", " + integer2);
     }
+
+    private static void testEqual() {
+        Integer integer = 2; // Equivalent to : Integer.valueOf(2)
+        int i = 2;
+        Integer integer2 = 2;
+        Integer integer3 = new Integer(2);
+        System.out.println(integer == i); // true, auto-unboxing
+        System.out.println(integer3 == i); // true, auto-unboxing
+        System.out.println(integer == integer2); // true, IntegerCache
+        System.out.println(integer == integer3); // false, new Object
+
+        integer = 1024;
+        i = 1024;
+        integer2 = 1024;
+        System.out.println(integer == i); // true, auto-unboxing
+        System.out.println(integer == integer2); // false, IntegerCache
+    }
+
+    /**
+     * 一种奇技淫巧，没啥实际用处，只是为了秀一下反射可以修改final的field
+     */
+    private static void swapInteger(Integer integer1, Integer integer2) throws NoSuchFieldException, IllegalAccessException {
+        Integer temp = new Integer(integer1.intValue());
+        Field value = integer1.getClass().getDeclaredField("value");
+        value.setAccessible(true);
+        value.set(integer1, integer2);
+        Field value2 = integer2.getClass().getDeclaredField("value");
+        value2.setAccessible(true);
+        value2.set(integer2, temp);
+    }
+
 }
