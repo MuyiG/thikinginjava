@@ -19,6 +19,8 @@ public class UnicodeTest {
         printInHex(s4);
         String s5 = "a你";
         printInHex(s5);
+        String s6 = "🦖";
+        printInHex(s6);
     }
 
     private static void printInHex(String s) {
