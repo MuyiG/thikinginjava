@@ -25,7 +25,12 @@ public class UnicodeTest {
 
     private static void printInHex(String s) {
         System.out.println("String: " + s + ", length: " + s.length());
-        System.out.print("Code Points(Characters) in hex: ");
+        System.out.print("Code Points in hex: ");
+        for (int i : s.codePoints().toArray()) {
+            System.out.print(Integer.toHexString(i) + " ");
+        }
+        System.out.println();
+        System.out.print("Code Units(Characters) in hex: ");
         for (char c : s.toCharArray()) {
             System.out.print(Integer.toHexString(c) + " ");
         }
@@ -37,5 +42,4 @@ public class UnicodeTest {
         System.out.println();
         System.out.println("-----");
     }
-
 }
