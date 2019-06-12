@@ -1,13 +1,5 @@
 package com.sunshinevvv.thinkinginjava.strings;
 
-/**
- * <p>文件描述：</p>
- * <p>版权所有： 版权所有(C)2011-2099</p>
- * <p>公   司： 口袋购物</p>
- * <p>其他说明：</p>
- * <p>作   者：杨光</p>
- * <p>完成日期：2018/6/14</p>
- */
 public class EmojiUtil {
 
     public static void main(String[] args) {
