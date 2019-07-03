@@ -31,15 +31,15 @@ public class JavaChars {
     }
 
     private static void testFilter() {
-        System.out.println(filterNonBMPCharacters("\uD86D\uDFD2小青童鞋"));
-        System.out.println(filterNonBMPCharacters("哈哈"));
-        System.out.println(filterNonBMPCharacters(""));
-        System.out.println(filterNonBMPCharacters("哈🦖哈😝"));
-        System.out.println(filterNonBMPCharacters("𡃁妹"));
-        System.out.println(filterNonBMPCharacters("asdads\uD86D\uDFD2jkahskdjhakjsd"));
+        System.out.println(filterSurrogateCharacters("\uD86D\uDFD2小青童鞋"));
+        System.out.println(filterSurrogateCharacters("哈哈"));
+        System.out.println(filterSurrogateCharacters(""));
+        System.out.println(filterSurrogateCharacters("哈🦖哈😝"));
+        System.out.println(filterSurrogateCharacters("𡃁妹"));
+        System.out.println(filterSurrogateCharacters("asdads\uD86D\uDFD2jkahskdjhakjsd"));
     }
 
-    public static String filterNonBMPCharacters(String s) {
+    public static String filterSurrogateCharacters(String s) {
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             if (!Character.isSurrogate(c)) {
