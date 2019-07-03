@@ -1,13 +1,27 @@
 package com.sunshinevvv.thinkinginjava.strings;
 
+import java.nio.charset.StandardCharsets;
+
 public class JavaChars {
 
     public static void main(String[] args) {
+        testMessyCode();
+
 //        testChars();
 
 //        testSubString();
 
-        testFilter();
+//        testFilter();
+    }
+
+    private static void testMessyCode() {
+        String s = "好";
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_16BE);
+        for (byte b : bytes) {
+            System.out.print(Integer.toHexString(b & 0xFF) + " ");
+        }
+        System.out.println();
+        System.out.println(new String(bytes, StandardCharsets.UTF_8));
     }
 
     private static void testChars() {
