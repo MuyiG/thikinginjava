@@ -3,7 +3,8 @@ package com.sunshinevvv.thinkinginjava.strings;
 public class UnicodeTest {
 
     public static void main(String[] args) {
-        testUnicode();
+//        testUnicode();
+        testFilter();
     }
 
     private static void testUnicode() {
@@ -42,5 +43,23 @@ public class UnicodeTest {
         }
         System.out.println();
         System.out.println("-----");
+    }
+
+    private static void testFilter() {
+        System.out.println(filterNonBMPCharacters("哈哈"));
+        System.out.println(filterNonBMPCharacters(""));
+        System.out.println(filterNonBMPCharacters("哈🦖哈😝"));
+        System.out.println(filterNonBMPCharacters("𡃁妹"));
+        System.out.println(filterNonBMPCharacters("asdads\uD86D\uDFD2jkahskdjhakjsd"));
+    }
+
+    private static String filterNonBMPCharacters(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (!Character.isSurrogate(c)) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
