@@ -17,8 +17,9 @@ public class UnicodeTest {
         printInHex(s3);
         String s4 = "ab";
         printInHex(s4);
-        String s5 = "a你";
+        String s5 = "\uD86D\uDFD2";
         printInHex(s5);
+        printInHex(s5.substring(1));
         String s6 = "🦖";
         printInHex(s6);
     }
@@ -30,7 +31,7 @@ public class UnicodeTest {
             System.out.print(Integer.toHexString(i) + " ");
         }
         System.out.println();
-        System.out.print("Code Units(Characters) in hex: ");
+        System.out.print("Characters in hex: ");
         for (char c : s.toCharArray()) {
             System.out.print(Integer.toHexString(c) + " ");
         }

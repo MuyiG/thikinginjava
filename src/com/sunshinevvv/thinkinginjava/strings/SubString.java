@@ -17,6 +17,5 @@ public class SubString {
         String s3 = "https://h5.daily.weidian.com/m/wenwen/article.html?aid=fdad5138&templateId=4";
         System.out.println(s3.substring(0, s3.lastIndexOf('/')));
 
-
     }
 }
