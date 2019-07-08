@@ -8,7 +8,7 @@ public class UnicodeTest {
     }
 
     private static void testUnicode() {
-        String s1 = "你好";
+        String s1 = "\uD86D\uDFD2";
         printInHex(s1);
         String s2 = "𡃁妹";
         System.out.println(s2.charAt(2)); // 不会报错，因为这个字符串实际上有3个char
