@@ -1,7 +1,9 @@
 package com.sunshinevvv.thinkinginjava.singleton;
 
 /**
- * 饿汉模式，第一时间创建示例，避免后续并发问题；缺点是可能会造成资源浪费。
+ * 普通模式，简单直接，依赖JVM的类初始化机制即可实现线程安全；<br/>
+ * 个人感觉提前初始化不算什么缺点，牺牲一点启动速度来换取简洁和正确性是很值得的。[EJ Item 83] 也推荐这种模式，绝大多数情况下都用不到懒加载<br/>
+ * 如果非要实现懒加载，可以参见 {@link LazySingletonNaive}, {@link LazySingletonDCL}, {@link LazySingletonHolder}
  */
 public class EagerSingleton {
 
@@ -13,6 +15,10 @@ public class EagerSingleton {
 
     public static EagerSingleton getInstance() {
         return eagerSingleton;
+    }
+
+    public static void main(String[] args) {
+        getInstance();
     }
 
 }
