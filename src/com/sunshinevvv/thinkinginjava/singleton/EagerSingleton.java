@@ -13,12 +13,9 @@ public class EagerSingleton {
         System.out.println("EagerSingleton()");
     }
 
+    // 问题：如果实例只在第一次调用该方法时初始化，那和懒加载有什么区别呢？
     public static EagerSingleton getInstance() {
         return eagerSingleton;
-    }
-
-    public static void main(String[] args) {
-        getInstance();
     }
 
 }
