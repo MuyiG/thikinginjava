@@ -6,6 +6,7 @@ package com.sunshinevvv.thinkinginjava.singleton;
 public class SingletonTest {
 
     public static void main(String[] args) {
+        EagerSingleton.getSomething();
         EagerSingleton.getInstance();
         LazySingletonNaive.getInstance();
         LazySingletonDCL.getInstance();

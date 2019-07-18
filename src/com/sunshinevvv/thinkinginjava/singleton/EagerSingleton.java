@@ -13,9 +13,18 @@ public class EagerSingleton {
         System.out.println("EagerSingleton()");
     }
 
-    // 问题：如果实例只在第一次调用该方法时初始化，那和懒加载有什么区别呢？
+    /**
+     * 问题：静态实例变量只在类初始化时执行初始化，而类初始化的时机就是 getInstance 方法的调用，那这和懒加载有什么区别呢？
+     * 答：如果该类只有一个公开方法就是 getInstance，那么如此实现其实就是懒加载；
+     *  但是如果还有其他公开的方法或者变量（比如下面的 getSomething)，则这种写法会在还没调用到 getInstance 时就触发了不必要的实例化。
+     */
     public static EagerSingleton getInstance() {
         return eagerSingleton;
+    }
+
+
+    public static String getSomething() {
+        return "Something";
     }
 
 }
