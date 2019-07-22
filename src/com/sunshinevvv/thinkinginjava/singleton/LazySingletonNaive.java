@@ -1,7 +1,7 @@
 package com.sunshinevvv.thinkinginjava.singleton;
 
 /**
- * 基础饱汉模式，实现了资源的懒加载，但是有并发问题，只能在单线程环境下使用
+ * 简单懒加载模式，有并发问题，只能在单线程环境下使用
  */
 public class LazySingletonNaive {
 
@@ -11,7 +11,7 @@ public class LazySingletonNaive {
         System.out.println("LazySingletonNaive()");
     }
 
-    public static LazySingletonNaive getInstance() {
+    public static synchronized LazySingletonNaive getInstance() {
         if (instance == null) {
             instance = new LazySingletonNaive();
         }

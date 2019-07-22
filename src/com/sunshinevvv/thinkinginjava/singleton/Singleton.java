@@ -5,12 +5,12 @@ package com.sunshinevvv.thinkinginjava.singleton;
  * 个人感觉提前初始化不算什么缺点，牺牲一点启动速度来换取简洁和正确性是很值得的。[EJ Item 83] 也推荐这种模式，绝大多数情况下都用不到懒加载<br/>
  * 如果非要实现懒加载，可以参见 {@link LazySingletonNaive}, {@link LazySingletonDCL}, {@link LazySingletonHolder}
  */
-public class EagerSingleton {
+public class Singleton {
 
-    private static final EagerSingleton eagerSingleton = new EagerSingleton();
+    private static final Singleton eagerSingleton = new Singleton();
 
-    private EagerSingleton() {
-        System.out.println("EagerSingleton()");
+    private Singleton() {
+        System.out.println("Singleton()");
     }
 
     /**
@@ -18,7 +18,7 @@ public class EagerSingleton {
      * 答：如果该类只有一个公开方法就是 getInstance，那么如此实现其实就是懒加载；
      *  但是如果还有其他公开的方法或者变量（比如下面的 getSomething)，则这种写法会在还没调用到 getInstance 时就触发了不必要的实例化。
      */
-    public static EagerSingleton getInstance() {
+    public static Singleton getInstance() {
         return eagerSingleton;
     }
 

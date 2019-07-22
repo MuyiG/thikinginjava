@@ -12,8 +12,9 @@ public class LocalDateTest {
     private static void testUntil() {
         LocalDate start = LocalDate.of(2018, 11, 20);
         LocalDate end = LocalDate.of(2018, 12, 6);
-        System.out.println(start.until(start, ChronoUnit.DAYS));
         System.out.println(start.until(end, ChronoUnit.DAYS));
+        System.out.println(start.until(start, ChronoUnit.DAYS));
+        System.out.println(end.until(start, ChronoUnit.DAYS));
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(1544772832000L);
