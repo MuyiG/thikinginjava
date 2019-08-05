@@ -13,13 +13,17 @@ class Number {
     public int getValue() {
         return value;
     }
+
+    public boolean isEven() {
+        return value % 2 == 0;
+    }
 }
 
 class PrintOdd implements Runnable {
 
-    private Number number;
+    private final Number number;
 
-    public PrintOdd(Number number) {
+    PrintOdd(Number number) {
         this.number = number;
     }
 
@@ -31,7 +35,7 @@ class PrintOdd implements Runnable {
                     if (number.getValue() >= 9) {
                         return;
                     }
-                    while (number.getValue() % 2 != 0) {
+                    while (!number.isEven()) {
                         number.wait();
                     }
                     number.increment();
@@ -47,9 +51,9 @@ class PrintOdd implements Runnable {
 
 class PrintEven implements Runnable {
 
-    private Number number;
+    private final Number number;
 
-    public PrintEven(Number number) {
+    PrintEven(Number number) {
         this.number = number;
     }
 
@@ -61,7 +65,7 @@ class PrintEven implements Runnable {
                     if (number.getValue() >= 10) {
                         return;
                     }
-                    while (number.getValue() % 2 == 0) {
+                    while (number.isEven()) {
                         number.wait();
                     }
                     number.increment();
