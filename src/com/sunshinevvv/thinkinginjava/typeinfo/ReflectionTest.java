@@ -1,42 +1,53 @@
 package com.sunshinevvv.thinkinginjava.typeinfo;
 
-import com.sunshinevvv.thinkinginjava.common.BasicModel;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.concurrent.Callable;
 
 /**
  * 反射
  */
 public class ReflectionTest {
 
-    private static <T> void getActualClass(T t) {
-        Class<?> actualClass = t.getClass();
-        System.out.println(actualClass.getCanonicalName());
+    class TestInterface implements Callable<String>, Comparable<Integer> {
+
+        @Override
+        public String call() {
+            return null;
+        }
+
+        @Override
+        public int compareTo(Integer o) {
+            return 0;
+        }
+
     }
 
-    private static <T> void getActualCollectionClass(Collection<T> collection) {
-        Class c = collection.getClass();
-        Type type = c.getGenericSuperclass();
-        Type[] params = ((ParameterizedType) type).getActualTypeArguments();
-        Class<?> actualClass = (Class) params[0];
-        System.out.println(actualClass.getCanonicalName());
+    static class SubArrayList<E> extends ArrayList<E> {
+
+    }
+
+    private static void printSuperclass(Class<?> c) {
+        Type superclass = c.getGenericSuperclass();
+        ParameterizedType parameterizedType = (ParameterizedType) superclass;
+        System.out.println("superclass:" + parameterizedType.getTypeName());
+    }
+
+    private static void printInterfaces(Class<?> c) {
+        Type[] types = c.getGenericInterfaces();
+        System.out.println("interfaces:");
+        for (Type type : types) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            System.out.println(parameterizedType.getTypeName());
+        }
     }
 
     public static void main(String[] args) {
-        getActualClass("");
-        getActualClass(1);
-        getActualClass(new BasicModel("name", 1));
-
-        Collection<String> c = new ArrayList<String>() {};
-        getActualCollectionClass(c);
-
-        // 会报错：java.lang.ClassCastException: sun.reflect.generics.reflectiveObjects.TypeVariableImpl cannot be cast to java.lang.Class
-        // WHY?
-//        List<String> list = new ArrayList<>();
-//        getActualCollectionClass(list);
+        SubArrayList<String> subArrayList = new SubArrayList<>();
+        printSuperclass(subArrayList.getClass());
+        printSuperclass(new ArrayList<String>() {}.getClass());
+        printInterfaces(TestInterface.class);
     }
 
 }
