@@ -9,7 +9,7 @@ public class FormatString {
         System.out.println(String.format("data:%s", "XX", "YY"));
 
         // 这种情况会抛异常
-        System.out.println(String.format("data:%s, data:%s", "XX"));
+//        System.out.println(String.format("data:%s, data:%s", "XX"));
     }
 }
 
