@@ -16,7 +16,7 @@ class Producer implements Runnable {
             String item = "hello";
             while (!Thread.interrupted()) {
                 System.out.println(Thread.currentThread().getName() + " Produce: " + item);
-                queue.add(item);
+                queue.offer(item);
                 TimeUnit.MILLISECONDS.sleep(500);
             }
         } catch (InterruptedException e) {
