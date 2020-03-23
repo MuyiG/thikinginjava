@@ -15,4 +15,13 @@ public class BaseGeneric<T> {
     public BaseGeneric(T data) {
         this.data = data;
     }
+
+    public BaseGeneric() {
+
+    }
+
+    public static void main(String[] args) {
+        new BaseGeneric<String>() {};
+    }
+
 }
