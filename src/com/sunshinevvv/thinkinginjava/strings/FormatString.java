@@ -10,6 +10,13 @@ public class FormatString {
 
         // 这种情况会抛异常
 //        System.out.println(String.format("data:%s, data:%s", "XX"));
+
+        formatHex();
+    }
+
+    private static void formatHex() {
+        // 输出十六进制，用0补全到4位，结果是：001a
+        System.out.println(String.format("%04x", 26));
     }
 }
 
