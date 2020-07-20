@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.lambda;
+package com.sunshinevvv.thinkinginjava.jdk8.lambda;
 
 import java.security.PrivilegedAction;
 import java.util.concurrent.Callable;

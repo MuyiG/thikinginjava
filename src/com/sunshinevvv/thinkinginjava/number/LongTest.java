@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.common;
+package com.sunshinevvv.thinkinginjava.number;
 
 /**
  * Created by sunshine on 2017/4/25.

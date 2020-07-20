@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.common;
+package com.sunshinevvv.thinkinginjava.number;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

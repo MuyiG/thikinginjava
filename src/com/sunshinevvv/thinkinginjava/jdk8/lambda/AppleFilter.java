@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.lambda;
+package com.sunshinevvv.thinkinginjava.jdk8.lambda;
 
 import java.util.ArrayList;
 import java.util.Comparator;

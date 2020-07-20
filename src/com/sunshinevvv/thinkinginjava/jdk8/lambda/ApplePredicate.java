@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.lambda;
+package com.sunshinevvv.thinkinginjava.jdk8.lambda;
 
 public interface ApplePredicate {
     boolean test(Apple apple);

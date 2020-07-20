@@ -1,4 +1,4 @@
-package com.sunshinevvv.thinkinginjava.common;
+package com.sunshinevvv.thinkinginjava.date;
 
 import java.util.Date;
 
