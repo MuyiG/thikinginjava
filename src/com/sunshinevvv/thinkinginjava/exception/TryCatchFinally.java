@@ -5,7 +5,16 @@ public class TryCatchFinally {
     private int i;
 
     public static void main(String[] args) {
-        System.out.println(test2());
+//        System.out.println(test2());
+        testTryFinally();
+    }
+
+    public static void testTryFinally() {
+        try {
+            int x = 1 / 0;
+        } finally {
+            System.out.println("finally");
+        }
     }
 
     public static int test() {
